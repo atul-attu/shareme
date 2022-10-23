@@ -5,11 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
-import sanityClient from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
 
 
-//import {client} from '../client.js';
+import {client} from '../client'
 
 const Login = () => {
 
@@ -21,18 +19,6 @@ const Login = () => {
 			gapi.auth2.init({clientId:clientId})
 		})
 	}, []);
-
-	const client = sanityClient ({
-		projectId:process.env.REACT_APP_SANITY_PROJECT_ID,
-		dataset:'production',
-		apiVersion:'2021-11-16',
-		useCdn:true,
-		token:process.env.REACT_APP_SANITY_TOKEN
-	});
-
-	const builder = imageUrlBuilder(client);
-
-	const urlFor = (source) => builder.image(source);
 
 	const responseGoogle = (response) => {
 		localStorage.setItem('user', JSON.stringify(response.profileObj));
